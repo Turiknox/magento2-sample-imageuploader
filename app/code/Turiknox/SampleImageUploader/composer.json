@@ -1,0 +1,33 @@
+{
+  "name": "turiknox/module-sampleimageuploader",
+  "description": "A Magento 2 sample module demonstrating how to upload an image file within a grid and form UI Component.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "require": {
+    "php": "~5.6.5|7.0.2|~7.0.6",
+    "magento/module-backend": "100.1.*",
+    "magento/module-cms": "101.0.*",
+    "magento/module-ui": "100.1.*",
+    "magento/module-store": "100.1.*",
+    "magento/framework": "100.1.*",
+    "magento/module-media-storage": "100.1.*",
+    "magento/module-directory": "100.1.*",
+    "magento/module-customer": "100.1.*",
+    "magento/module-rss": "100.1.*"
+  },
+  "type": "magento2-module",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/Turiknox/magento2-sample-imageuploader"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Turiknox\\SampleImageUploader\\": ""
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/*
+ * Turiknox_SampleImageUploader
+
+ * @category   Turiknox
+ * @package    Turiknox_SampleImageUploader
+ * @copyright  Copyright (c) 2017 Turiknox
+ * @license    https://github.com/turiknox/magento2-sample-imageuploader/blob/master/LICENSE.md
+ * @version    1.0.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Turiknox_SampleImageUploader" setup_version="1.0.0" />
+</config>

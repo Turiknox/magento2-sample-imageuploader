@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/*
+ * Turiknox_SampleImageUploader
+
+ * @category   Turiknox
+ * @package    Turiknox_SampleImageUploader
+ * @copyright  Copyright (c) 2017 Turiknox
+ * @license    https://github.com/turiknox/magento2-sample-imageuploader/blob/master/LICENSE.md
+ * @version    1.0.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="TuriknoxSampleImageUploaderUiDataProviderImageFormModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="image_data" xsi:type="array">
+                    <item name="class" xsi:type="string">Turiknox\SampleImageUploader\Ui\DataProvider\Image\Form\Modifier\ImageData</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Turiknox\SampleImageUploader\Model\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">TuriknoxSampleImageUploaderUiDataProviderImageFormModifierPool</argument>
+        </arguments>
+    </type>
+</config>
