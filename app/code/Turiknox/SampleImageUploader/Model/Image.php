@@ -18,10 +18,8 @@ use Magento\Framework\Registry;
 use Magento\Framework\Exception\LocalizedException;
 use Turiknox\SampleImageUploader\Api\Data\ImageInterface;
 
-class Image extends AbstractModel
-    implements ImageInterface
+class Image extends AbstractModel implements ImageInterface
 {
-
     /**
      * Cache tag
      */
@@ -48,17 +46,18 @@ class Image extends AbstractModel
         AbstractResource $resource = null,
         AbstractDb $resourceCollection = null,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->uploaderPool    = $uploaderPool;
     }
 
     /**
      * Initialise resource model
+     * @codingStandardsIgnoreStart
      */
     protected function _construct()
     {
+        // @codingStandardsIgnoreEnd
         $this->_init('Turiknox\SampleImageUploader\Model\ResourceModel\Image');
     }
 

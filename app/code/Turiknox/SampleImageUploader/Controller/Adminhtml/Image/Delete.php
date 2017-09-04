@@ -25,7 +25,7 @@ class Delete extends Image
         $imageId = $this->getRequest()->getParam('image_id');
         if ($imageId) {
             try {
-                $this->_imageRepository->deleteById($imageId);
+                $this->imageRepository->deleteById($imageId);
                 $this->messageManager->addSuccessMessage(__('The image has been deleted.'));
                 $resultRedirect->setPath('sampleimageuploader/image/index');
                 return $resultRedirect;

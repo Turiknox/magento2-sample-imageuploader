@@ -29,28 +29,28 @@ abstract class Image extends Action
      *
      * @var ImageRepositoryInterface
      */
-    protected $_imageRepository;
+    protected $imageRepository;
 
     /**
      * Core registry
      *
      * @var Registry
      */
-    protected $_coreRegistry;
+    protected $coreRegistry;
 
     /**
      * Result Page Factory
      *
      * @var PageFactory
      */
-    protected $_resultPageFactory;
+    protected $resultPageFactory;
 
     /**
      * Date filter
      *
      * @var Date
      */
-    protected $_dateFilter;
+    protected $dateFilter;
 
     /**
      * Sliders constructor.
@@ -67,12 +67,11 @@ abstract class Image extends Action
         PageFactory $resultPageFactory,
         Date $dateFilter,
         Context $context
-
     ) {
-        $this->_coreRegistry         = $registry;
-        $this->_imageRepository      = $imageRepository;
-        $this->_resultPageFactory    = $resultPageFactory;
-        $this->_dateFilter = $dateFilter;
         parent::__construct($context);
+        $this->coreRegistry         = $registry;
+        $this->imageRepository      = $imageRepository;
+        $this->resultPageFactory    = $resultPageFactory;
+        $this->dateFilter = $dateFilter;
     }
 }

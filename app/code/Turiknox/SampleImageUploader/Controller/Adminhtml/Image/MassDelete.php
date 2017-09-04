@@ -25,22 +25,22 @@ class MassDelete extends Image
     /**
      * @var Filter
      */
-    protected $_filter;
+    protected $filter;
 
     /**
      * @var CollectionFactory
      */
-    protected $_collectionFactory;
+    protected $collectionFactory;
 
     /**
      * @var string
      */
-    protected $_successMessage;
+    protected $successMessage;
 
     /**
      * @var string
      */
-    protected $_errorMessage;
+    protected $errorMessage;
 
     /**
      * MassAction constructor.
@@ -67,10 +67,10 @@ class MassDelete extends Image
         $errorMessage
     ) {
         parent::__construct($registry, $imageRepository, $resultPageFactory, $dateFilter, $context);
-        $this->_filter            = $filter;
-        $this->_collectionFactory = $collectionFactory;
-        $this->_successMessage    = $successMessage;
-        $this->_errorMessage      = $errorMessage;
+        $this->filter            = $filter;
+        $this->collectionFactory = $collectionFactory;
+        $this->successMessage    = $successMessage;
+        $this->errorMessage      = $errorMessage;
     }
 
     /**
@@ -81,16 +81,16 @@ class MassDelete extends Image
     public function execute()
     {
         try {
-            $collection = $this->_filter->getCollection($this->_collectionFactory->create());
+            $collection = $this->filter->getCollection($this->collectionFactory->create());
             $collectionSize = $collection->getSize();
             foreach ($collection as $image) {
-                $this->_imageRepository->delete($image);
+                $this->imageRepository->delete($image);
             }
-            $this->messageManager->addSuccessMessage(__($this->_successMessage, $collectionSize));
+            $this->messageManager->addSuccessMessage(__($this->successMessage, $collectionSize));
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {
-            $this->messageManager->addExceptionMessage($e, __($this->_errorMessage));
+            $this->messageManager->addExceptionMessage($e, __($this->errorMessage));
         }
         $redirectResult = $this->resultRedirectFactory->create();
         $redirectResult->setPath('sampleimageuploader/image');

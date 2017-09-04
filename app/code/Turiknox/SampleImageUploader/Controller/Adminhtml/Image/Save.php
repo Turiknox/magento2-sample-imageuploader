@@ -28,27 +28,27 @@ class Save extends Image
     /**
      * @var Manager
      */
-    protected $_messageManager;
+    protected $messageManager;
 
     /**
      * @var ImageRepositoryInterface
      */
-    protected $_imageRepository;
+    protected $imageRepository;
 
     /**
      * @var ImageInterfaceFactory
      */
-    protected $_imageFactory;
+    protected $imageFactory;
 
     /**
      * @var DataObjectHelper
      */
-    protected $_dataObjectHelper;
+    protected $dataObjectHelper;
 
     /**
      * @var UploaderPool
      */
-    protected $_uploaderPool;
+    protected $uploaderPool;
 
     /**
      * Save constructor.
@@ -73,14 +73,13 @@ class Save extends Image
         DataObjectHelper $dataObjectHelper,
         UploaderPool $uploaderPool,
         Context $context
-    )
-    {
+    ) {
         parent::__construct($registry, $imageRepository, $resultPageFactory, $dateFilter, $context);
-        $this->_messageManager   = $messageManager;
-        $this->_imageFactory      = $imageFactory;
-        $this->_imageRepository   = $imageRepository;
-        $this->_dataObjectHelper  = $dataObjectHelper;
-        $this->_uploaderPool = $uploaderPool;
+        $this->messageManager   = $messageManager;
+        $this->imageFactory      = $imageFactory;
+        $this->imageRepository   = $imageRepository;
+        $this->dataObjectHelper  = $dataObjectHelper;
+        $this->uploaderPool = $uploaderPool;
     }
 
     /**
@@ -96,30 +95,33 @@ class Save extends Image
         if ($data) {
             $id = $this->getRequest()->getParam('image_id');
             if ($id) {
-                $model = $this->_imageRepository->getById($id);
+                $model = $this->imageRepository->getById($id);
             } else {
                 unset($data['image_id']);
-                $model = $this->_imageFactory->create();
+                $model = $this->imageFactory->create();
             }
 
             try {
                 $image = $this->getUploader('image')->uploadFileAndGetName('image', $data);
                 $data['image'] = $image;
 
-                $this->_dataObjectHelper->populateWithArray($model, $data, ImageInterface::class);
-                $this->_imageRepository->save($model);
-                $this->_messageManager->addSuccessMessage(__('You saved this image.'));
+                $this->dataObjectHelper->populateWithArray($model, $data, ImageInterface::class);
+                $this->imageRepository->save($model);
+                $this->messageManager->addSuccessMessage(__('You saved this image.'));
                 $this->_getSession()->setFormData(false);
                 if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath('*/*/edit', ['image_id' => $model->getId(), '_current' => true]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->_messageManager->addErrorMessage($e->getMessage());
+                $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\RuntimeException $e) {
-                $this->_messageManager->addErrorMessage($e->getMessage());
+                $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->_messageManager->addException($e, __('Something went wrong while saving the image:' . $e->getMessage()));
+                $this->messageManager->addException(
+                    $e,
+                    __('Something went wrong while saving the image:' . $e->getMessage())
+                );
             }
 
             $this->_getSession()->setFormData($data);
@@ -135,6 +137,6 @@ class Save extends Image
      */
     protected function getUploader($type)
     {
-        return $this->_uploaderPool->getUploader($type);
+        return $this->uploaderPool->getUploader($type);
     }
 }

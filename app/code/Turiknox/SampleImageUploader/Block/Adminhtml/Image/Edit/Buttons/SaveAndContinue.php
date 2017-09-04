@@ -14,7 +14,6 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 class SaveAndContinue extends Generic implements ButtonProviderInterface
 {
-
     /**
      * Get button data
      *

@@ -26,38 +26,37 @@ class ImageRepository implements ImageRepositoryInterface
     /**
      * @var array
      */
-    protected $_instances = [];
+    protected $instances = [];
     /**
      * @var ResourceImage
      */
-    protected $_resource;
+    protected $resource;
 
     /**
      * @var ImageCollectionFactory
      */
-    protected $_imageCollectionFactory;
+    protected $imageCollectionFactory;
 
     /**
      * @var ImageInterfaceFactory
      */
-    protected $_imageInterfaceFactory;
+    protected $imageInterfaceFactory;
 
     /**
      * @var DataObjectHelper
      */
-    protected $_dataObjectHelper;
+    protected $dataObjectHelper;
 
     public function __construct(
         ResourceImage $resource,
         ImageCollectionFactory $imageCollectionFactory,
         ImageInterfaceFactory $imageInterfaceFactory,
         DataObjectHelper $dataObjectHelper
-    )
-    {
-        $this->_resource = $resource;
-        $this->_imageCollectionFactory = $imageCollectionFactory;
-        $this->_imageInterfaceFactory = $imageInterfaceFactory;
-        $this->_dataObjectHelper = $dataObjectHelper;
+    ) {
+        $this->resource = $resource;
+        $this->imageCollectionFactory = $imageCollectionFactory;
+        $this->imageInterfaceFactory = $imageInterfaceFactory;
+        $this->dataObjectHelper = $dataObjectHelper;
     }
 
     /**
@@ -68,8 +67,8 @@ class ImageRepository implements ImageRepositoryInterface
     public function save(ImageInterface $image)
     {
         try {
-            /** @var ImageInterface|\Magento\Framework\Model\AbstractModel $data */
-            $this->_resource->save($image);
+            /** @var ImageInterface|\Magento\Framework\Model\AbstractModel $image */
+            $this->resource->save($image);
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(__(
                 'Could not save the image: %1',
@@ -88,16 +87,15 @@ class ImageRepository implements ImageRepositoryInterface
      */
     public function getById($imageId)
     {
-        if (!isset($this->_instances[$imageId])) {
-            /** @var \Turiknox\SampleImageUploader\Api\Data\ImageInterface|\Magento\Framework\Model\AbstractModel $data */
-            $image = $this->_imageInterfaceFactory->create();
-            $this->_resource->load($image, $imageId);
+        if (!isset($this->instances[$imageId])) {
+            $image = $this->imageInterfaceFactory->create();
+            $this->resource->load($image, $imageId);
             if (!$image->getId()) {
                 throw new NoSuchEntityException(__('Requested image doesn\'t exist'));
             }
-            $this->_instances[$imageId] = $image;
+            $this->instances[$imageId] = $image;
         }
-        return $this->_instances[$imageId];
+        return $this->instances[$imageId];
     }
 
     /**
@@ -108,11 +106,11 @@ class ImageRepository implements ImageRepositoryInterface
      */
     public function delete(ImageInterface $image)
     {
-        /** @var \Turiknox\SampleImageUploader\Api\Data\ImageInterface|\Magento\Framework\Model\AbstractModel $data */
+        /** @var \Turiknox\SampleImageUploader\Api\Data\ImageInterface|\Magento\Framework\Model\AbstractModel $image */
         $id = $image->getId();
         try {
-            unset($this->_instances[$id]);
-            $this->_resource->delete($image);
+            unset($this->instances[$id]);
+            $this->resource->delete($image);
         } catch (ValidatorException $e) {
             throw new CouldNotSaveException(__($e->getMessage()));
         } catch (\Exception $e) {
@@ -120,7 +118,7 @@ class ImageRepository implements ImageRepositoryInterface
                 __('Unable to remove image %1', $id)
             );
         }
-        unset($this->_instances[$id]);
+        unset($this->instances[$id]);
         return true;
     }
 

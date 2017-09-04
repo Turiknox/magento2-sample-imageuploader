@@ -20,7 +20,7 @@ class Index extends Image
     public function execute()
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->_resultPageFactory->create();
+        $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Turiknox_SampleImageUploader::image');
         $resultPage->getConfig()->getTitle()->prepend(__('Images'));
         $resultPage->addBreadcrumb(__('Images'), __('Images'));

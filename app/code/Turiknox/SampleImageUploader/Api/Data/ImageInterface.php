@@ -18,7 +18,6 @@ interface ImageInterface
     const IMAGE_ID          = 'image_id';
     const IMAGE             = 'image';
 
-
     /**
      * Get ID
      *
@@ -49,5 +48,4 @@ interface ImageInterface
      * @return ImageInterface
      */
     public function setImage($image);
-
 }

@@ -1,4 +1,5 @@
 <?php
+// @codingStandardsIgnoreFile
 /*
  * Turiknox_SampleImageUploader
 

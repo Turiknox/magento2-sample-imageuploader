@@ -19,7 +19,7 @@ class Add extends Action
     /**
      * @var ForwardFactory
      */
-    protected $_resultForwardFactory;
+    protected $resultForwardFactory;
 
     /**
      * Add constructor.
@@ -31,8 +31,8 @@ class Add extends Action
         Context $context,
         ForwardFactory $resultForwardFactory
     ) {
-        $this->_resultForwardFactory = $resultForwardFactory;
         parent::__construct($context);
+        $this->resultForwardFactory = $resultForwardFactory;
     }
 
     /**
@@ -40,7 +40,7 @@ class Add extends Action
      */
     public function execute()
     {
-        $resultForward = $this->_resultForwardFactory->create();
+        $resultForward = $this->resultForwardFactory->create();
         return $resultForward->forward('edit');
     }
 }

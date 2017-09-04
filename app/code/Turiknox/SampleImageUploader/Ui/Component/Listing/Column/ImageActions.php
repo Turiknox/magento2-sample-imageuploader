@@ -25,7 +25,7 @@ class ImageActions extends Column
      *
      * @var \Magento\Framework\UrlInterface
      */
-    protected $_urlBuilder;
+    protected $urlBuilder;
 
     /**
      * @param ContextInterface $context
@@ -40,10 +40,9 @@ class ImageActions extends Column
         UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
-        $this->_urlBuilder = $urlBuilder;
+        $this->urlBuilder = $urlBuilder;
     }
 
     /**
@@ -59,7 +58,7 @@ class ImageActions extends Column
                 if (isset($item['image_id'])) {
                     $item[$this->getData('name')] = [
                         'edit' => [
-                            'href' => $this->_urlBuilder->getUrl(
+                            'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_EDIT,
                                 [
                                     'image_id' => $item['image_id']
@@ -68,7 +67,7 @@ class ImageActions extends Column
                             'label' => __('Edit')
                         ],
                         'delete' => [
-                            'href' => $this->_urlBuilder->getUrl(
+                            'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_DELETE,
                                 [
                                     'image_id' => $item['image_id']

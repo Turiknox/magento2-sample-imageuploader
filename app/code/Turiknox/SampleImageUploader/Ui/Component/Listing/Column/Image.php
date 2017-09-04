@@ -31,6 +31,11 @@ class Image extends Column
     protected $imageModel;
 
     /**
+     * @var UrlInterface
+     */
+    protected $urlBuilder;
+
+    /**
      * Image constructor.
      *
      * @param ContextInterface $context
@@ -48,9 +53,9 @@ class Image extends Column
         array $components = [],
         array $data = []
     ) {
+        parent::__construct($context, $uiComponentFactory, $components, $data);
         $this->imageModel = $imageModel;
         $this->urlBuilder = $urlBuilder;
-        parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
     /**
@@ -61,11 +66,11 @@ class Image extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
-        if(isset($dataSource['data']['items'])) {
+        if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
-            foreach($dataSource['data']['items'] as & $item) {
+            foreach ($dataSource['data']['items'] as & $item) {
                 $url = '';
-                if($item[$fieldName] != '') {
+                if ($item[$fieldName] != '') {
                     $url = $this->imageModel->getBaseUrl().$this->imageModel->getBasePath().$item[$fieldName];
                 }
                 $item[$fieldName . '_src'] = $url;

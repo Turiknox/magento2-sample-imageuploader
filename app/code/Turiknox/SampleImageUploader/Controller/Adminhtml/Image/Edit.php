@@ -20,7 +20,7 @@ class Edit extends Image
     public function execute()
     {
         $imageId = $this->getRequest()->getParam('image_id');
-        $resultPage = $this->_resultPageFactory->create();
+        $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Turiknox_SampleImageUploader::image')
             ->addBreadcrumb(__('Images'), __('Images'))
             ->addBreadcrumb(__('Manage Images'), __('Manage Images'));

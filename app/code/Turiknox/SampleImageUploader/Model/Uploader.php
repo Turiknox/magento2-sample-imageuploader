@@ -108,10 +108,9 @@ class Uploader
         UploaderFactory $uploaderFactory,
         StoreManagerInterface $storeManager,
         LoggerInterface $logger,
-        $allowedExtensions = [],
         $baseTmpPath,
-        $basePath
-
+        $basePath,
+        $allowedExtensions = []
     ) {
         $this->coreFileStorageDatabase  = $coreFileStorageDatabase;
         $this->mediaDirectory           = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
@@ -206,16 +205,13 @@ class Uploader
      * Checking file for moving and move it
      *
      * @param string $name
-     *
      * @return string
-     *
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function moveFileFromTmp($name)
     {
         $baseTmpPath = $this->getBaseTmpPath();
         $basePath = $this->getBasePath();
-
         $baseFilePath = $this->getFilePath($basePath, $name);
         $baseTmpFilePath = $this->getFilePath($baseTmpPath, $name);
 
@@ -249,9 +245,7 @@ class Uploader
      * Checking file for save and save it to tmp dir
      *
      * @param string $fileId
-     *
      * @return string[]
-     *
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function saveFileToTmpDir($fileId)

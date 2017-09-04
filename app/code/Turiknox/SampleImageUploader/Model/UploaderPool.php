@@ -18,6 +18,7 @@ class UploaderPool
      * @var ObjectManagerInterface
      */
     protected $objectManager;
+
     /**
      * @var array
      */
@@ -47,7 +48,6 @@ class UploaderPool
         }
         if (!is_object($this->uploaders[$type])) {
             $this->uploaders[$type] = $this->objectManager->create($this->uploaders[$type]);
-
         }
         $uploader = $this->uploaders[$type];
         if (!($uploader instanceof Uploader)) {

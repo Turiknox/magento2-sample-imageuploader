@@ -40,10 +40,10 @@ class DataProvider extends AbstractDataProvider
         array $meta = [],
         array $data = []
     ) {
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->collection   = $imageCollectionFactory->create();
         $this->pool         = $pool;
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-        $this->meta = $this->prepareMeta($this->meta);
+        $this->meta         = $this->prepareMeta($this->meta);
     }
 
     /**
