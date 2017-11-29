@@ -49,9 +49,9 @@ class ImageData implements ModifierInterface
         /** @var $image \Turiknox\SampleImageUploader\Model\Image */
         foreach ($items as $image) {
             $_data = $image->getData();
-            if (isset($_data['image'])) {
+            if (isset($_data['image']) && $_data['image'] != '') {
                 $imageArr = [];
-                $imageArr[0]['name'] = 'Image';
+                $imageArr[0]['name'] = $image->getImage();
                 $imageArr[0]['url'] = $image->getImageUrl();
                 $_data['image'] = $imageArr;
             }
